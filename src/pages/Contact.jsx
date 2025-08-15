@@ -25,32 +25,23 @@ const Contact = () => {
     setLoading(true);
     setCurrentAnimation("hit");
 
-    // Debug: Check if environment variables are loaded
-    console.log("EmailJS Config:", {
-      serviceId: import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-      templateId: import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-      publicKey: import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
-    });
+    // EmailJS configuration - fallback for production
+    const emailConfig = {
+      serviceId:
+        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID || "service_zsja8i9",
+      templateId:
+        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID || "template_cdj1kyw",
+      publicKey:
+        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY || "Wiy4_d7TCdcRqTQvJ",
+    };
 
-    if (
-      !import.meta.env.VITE_APP_EMAILJS_SERVICE_ID ||
-      !import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID ||
-      !import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-    ) {
-      setLoading(false);
-      setCurrentAnimation("idle");
-      showAlert({
-        show: true,
-        text: "Email service configuration missing. Please contact directly.",
-        type: "danger",
-      });
-      return;
-    }
+    // Debug: Check configuration
+    console.log("EmailJS Config:", emailConfig);
 
     emailjs
       .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+        emailConfig.serviceId,
+        emailConfig.templateId,
         {
           from_name: form.name,
           to_name: "Sandeepan",
@@ -58,7 +49,7 @@ const Contact = () => {
           to_email: "sandeepanchakraborty123@gmail.com",
           message: form.message,
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+        emailConfig.publicKey
       )
       .then(
         () => {
