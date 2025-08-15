@@ -1,8 +1,8 @@
-import React, { Suspense,useRef, useState } from "react";
-import emailjs from '@emailjs/browser';
+import React, { Suspense, useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import { Canvas } from "@react-three/fiber";
-import Fox from '../models/Fox';
-import Loader from '../components/Loader';
+import Fox from "../models/Fox";
+import Loader from "../components/Loader";
 import useAlert from "../hooks/useAlert";
 import Alert from "../components/Alert";
 
@@ -24,6 +24,26 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     setCurrentAnimation("hit");
+
+    // Debug: Check if environment variables are loaded
+    console.log('EmailJS Config:', {
+      serviceId: import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+      templateId: import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+      publicKey: import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+    });
+
+    if (!import.meta.env.VITE_APP_EMAILJS_SERVICE_ID || 
+        !import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID || 
+        !import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY) {
+      setLoading(false);
+      setCurrentAnimation("idle");
+      showAlert({
+        show: true,
+        text: "Email service configuration missing. Please contact directly.",
+        type: "danger",
+      });
+      return;
+    }
 
     emailjs
       .send(
@@ -72,24 +92,24 @@ const Contact = () => {
   };
 
   return (
-    <section className='relative flex lg:flex-row flex-col max-container'>
+    <section className="relative flex lg:flex-row flex-col max-container">
       {alert.show && <Alert {...alert} />}
 
-      <div className='flex-1 min-w-[50%] flex flex-col'>
-        <h1 className='head-text'>Get in Touch</h1>
+      <div className="flex-1 min-w-[50%] flex flex-col">
+        <h1 className="head-text">Get in Touch</h1>
 
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className='w-full flex flex-col gap-7 mt-14'
+          className="w-full flex flex-col gap-7 mt-14"
         >
-          <label className='text-black-500 font-semibold'>
+          <label className="text-black-500 font-semibold">
             Name
             <input
-              type='text'
-              name='name'
-              className='input'
-              placeholder='John'
+              type="text"
+              name="name"
+              className="input"
+              placeholder="John"
               required
               value={form.name}
               onChange={handleChange}
@@ -97,13 +117,13 @@ const Contact = () => {
               onBlur={handleBlur}
             />
           </label>
-          <label className='text-black-500 font-semibold'>
+          <label className="text-black-500 font-semibold">
             Email
             <input
-              type='email'
-              name='email'
-              className='input'
-              placeholder='John@gmail.com'
+              type="email"
+              name="email"
+              className="input"
+              placeholder="John@gmail.com"
               required
               value={form.email}
               onChange={handleChange}
@@ -111,13 +131,13 @@ const Contact = () => {
               onBlur={handleBlur}
             />
           </label>
-          <label className='text-black-500 font-semibold'>
+          <label className="text-black-500 font-semibold">
             Your Message
             <textarea
-              name='message'
-              rows='4'
-              className='textarea'
-              placeholder='Write your thoughts here...'
+              name="message"
+              rows="4"
+              className="textarea"
+              placeholder="Write your thoughts here..."
               value={form.message}
               onChange={handleChange}
               onFocus={handleFocus}
@@ -126,9 +146,9 @@ const Contact = () => {
           </label>
 
           <button
-            type='submit'
+            type="submit"
             disabled={loading}
-            className='btn'
+            className="btn"
             onFocus={handleFocus}
             onBlur={handleBlur}
           >
@@ -137,7 +157,7 @@ const Contact = () => {
         </form>
       </div>
 
-      <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]'>
+      <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
         <Canvas
           camera={{
             position: [0, 0, 5],

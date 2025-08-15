@@ -51,7 +51,11 @@ const Navbar = () => {
           className="w-8 h-8 rounded-lg bg-blue-100 hover:bg-blue-200 flex items-center justify-center transition-colors duration-300 group"
           onClick={(e) => {
             e.preventDefault();
-            window.open('https://www.linkedin.com/in/sandeepan-chakraborty/', '_blank', 'noopener,noreferrer');
+            window.open(
+              "https://www.linkedin.com/in/sandeepan-chakraborty/",
+              "_blank",
+              "noopener,noreferrer"
+            );
           }}
         >
           <img
