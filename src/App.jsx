@@ -4,9 +4,12 @@ import { Home, About, Projects, Contact } from "./pages";
 import Navbar from "./components/Navbar";
 
 const App = () => {
+  // Use basename only in production (GitHub Pages)
+  const basename = import.meta.env.PROD ? "/Porfolio" : "";
+  
   return (
     <main className="bg-slate-300/20 h-full">
-      <Router>
+      <Router basename={basename}>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
