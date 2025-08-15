@@ -26,15 +26,17 @@ const Contact = () => {
     setCurrentAnimation("hit");
 
     // Debug: Check if environment variables are loaded
-    console.log('EmailJS Config:', {
+    console.log("EmailJS Config:", {
       serviceId: import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
       templateId: import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-      publicKey: import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+      publicKey: import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
     });
 
-    if (!import.meta.env.VITE_APP_EMAILJS_SERVICE_ID || 
-        !import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID || 
-        !import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY) {
+    if (
+      !import.meta.env.VITE_APP_EMAILJS_SERVICE_ID ||
+      !import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID ||
+      !import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+    ) {
       setLoading(false);
       setCurrentAnimation("idle");
       showAlert({
