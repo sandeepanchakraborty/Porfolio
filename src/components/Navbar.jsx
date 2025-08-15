@@ -33,7 +33,7 @@ const Navbar = () => {
       {/* Social Links */}
       <div className="flex gap-3 items-center">
         <a
-          href="https://github.com/yourusername"
+          href="https://github.com/sandeepanchakraborty"
           target="_blank"
           rel="noopener noreferrer"
           className="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-300 group"
@@ -45,7 +45,7 @@ const Navbar = () => {
           />
         </a>
         <a
-          href="https://linkedin.com/in/yourprofile"
+          href="https://www.linkedin.com/in/sandeepan-chakraborty/"
           target="_blank"
           rel="noopener noreferrer"
           className="w-8 h-8 rounded-lg bg-blue-100 hover:bg-blue-200 flex items-center justify-center transition-colors duration-300 group"
