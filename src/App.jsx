@@ -1,15 +1,12 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, HashRouter as Router, Routes } from "react-router-dom";
 import { Home, About, Projects, Contact } from "./pages";
 import Navbar from "./components/Navbar";
 
 const App = () => {
-  // Use basename only in production (GitHub Pages)
-  const basename = import.meta.env.PROD ? "/Porfolio" : "";
-  
   return (
     <main className="bg-slate-300/20 h-full">
-      <Router basename={basename}>
+      <Router>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
